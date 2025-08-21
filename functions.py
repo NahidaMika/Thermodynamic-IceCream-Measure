@@ -185,6 +185,6 @@ def start():
     fit_content()
 
 if __name__ == "__main__":
-    #add_reflexion(FileName)
+    add_reflexion(FileName)
     place_images(FileName)
     fit_content()
