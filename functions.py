@@ -1,6 +1,7 @@
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils.dataframe import dataframe_to_rows
 from openpyxl.styles import Alignment
+from openpyxl.drawing.image import Image
 
 # Imorting the necessary modules
 try:
@@ -13,6 +14,7 @@ import pandas as pd
 import datetime
 import time
 import os
+from pathlib import Path, PureWindowsPath
 
 def get_current_time():
     return datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
@@ -52,7 +54,7 @@ def make_dataframe():
             Ice_temperature = float(Ice_temperature)
 
         Cream_Temp_list.append(f'{Cream_temperature}°C')
-    Ice_Temp_list.append(f'{Ice_temperature}°C')
+        Ice_Temp_list.append(f'{Ice_temperature}°C')
         time_list.append(get_current_time())
 
         Continue = str(input("Do you want to add more data? "))
@@ -146,8 +148,43 @@ def add_reflexion(FileName):
 
     openworkbook.save(f"{FileName}.xlsx")
 
+def place_images(FileName):
+    IceTemp1 = Image('imgs\\IceBath\\IceTemp1.jpg')
+    IceTemp2 = Image('imgs\\IceBath\\IceTemp2.jpg')
+    IceTemp3 = Image('imgs\\IceBath\\IceTemp3.jpg')
+    IceTemp4 = Image('imgs\\IceBath\\IceTemp4.jpg')
+    IceTemp5 = Image('imgs\\IceBath\\IceTemp5.jpg')
+
+    CreamTemp1 = Image('imgs\\CreamMix\\CreamTemp1.jpg')
+    CreamTemp2 = Image('imgs\\CreamMix\\CreamTemp2.jpg')
+    CreamTemp3 = Image('imgs\\CreamMix\\CreamTemp3.jpg')
+    CreamTemp4 = Image('imgs\\CreamMix\\CreamTemp4.jpg')
+    CreamTemp5 = Image('imgs\\CreamMix\\CreamTemp5.jpg')
+
+    openworkbook = load_workbook(f"{FileName}.xlsx")
+    openSheet = openworkbook.active
+
+    openSheet.add_image(IceTemp1, 'C9')
+    openSheet.add_image(IceTemp2, 'C10')
+    openSheet.add_image(IceTemp3, 'C11')
+    openSheet.add_image(IceTemp4, 'C12')
+    openSheet.add_image(IceTemp5, 'C13')
+
+    openSheet.add_image(CreamTemp1, 'B9')
+    openSheet.add_image(CreamTemp2, 'B10')
+    openSheet.add_image(CreamTemp3, 'B11')
+    openSheet.add_image(CreamTemp4, 'B12')
+    openSheet.add_image(CreamTemp5, 'B13')
+
+    openworkbook.save(f"{FileName}.xlsx")
+
 def start():
     check_file(FileName)
     add_dataframe(FileName, make_dataframe())
     add_reflexion(FileName)
+    fit_content()
+
+if __name__ == "__main__":
+    #add_reflexion(FileName)
+    place_images(FileName)
     fit_content()
