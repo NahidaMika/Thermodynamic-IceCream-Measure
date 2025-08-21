@@ -51,8 +51,8 @@ def make_dataframe():
             Cream_temperature = float(Cream_temperature)
             Ice_temperature = float(Ice_temperature)
 
-        Cream_Temp_list.append(Cream_temperature)
-        Ice_Temp_list.append(Ice_temperature)
+        Cream_Temp_list.append(f'{Cream_temperature}°C')
+    Ice_Temp_list.append(f'{Ice_temperature}°C')
         time_list.append(get_current_time())
 
         Continue = str(input("Do you want to add more data? "))
