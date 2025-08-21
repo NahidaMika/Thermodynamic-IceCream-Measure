@@ -131,6 +131,8 @@ def add_dataframe(FileName, df):
 def add_reflexion(FileName):
     reflexion = str(input("\nEnter the reflexion: "))
 
+    print(f"\n{reflexion}")
+
     openworkbook = load_workbook(f"{FileName}.xlsx")
     openSheet = openworkbook.active
 
